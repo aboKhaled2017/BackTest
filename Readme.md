@@ -29,15 +29,39 @@ You configure this settings from appsettings.json file
 - Swagger for OpenAPI documentation
 - Serilog for logging 
 
+
+## Environment to run the app (.NET 6 Project)
+
+This guide provides steps to set up and run a .NET 6 project on your machine.
+
+## Prerequisites
+
+- [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
+
+## Step-by-Step Guide
+
+1. **Install .NET 6 SDK:**
+
+   Download and install the .NET 6 SDK from the [official website](https://dotnet.microsoft.com/download/dotnet/6.0).
+
+2. **Verify Installation:**
+
+   Open a terminal and run the command:
+   ```bash
+   dotnet --version
+
+
 ## How to Use the Project
 
-1. **Run the Project**: Navigate to the base directory of the application and execute the follwoing commands
+1- Before running teh app , make sure that you have .net 6 runtime installed on your machine 
+
+2. **Run the Project**: Navigate to the base directory of the application and execute the follwoing commands
 `cd Backend`. 
 `dotnet run --urls=http://localhost:5000`. you can replace '5000' with whatever valid port to run the app on
 
-2- to open swagger , you can use the url where app listening to , here url=http://localhost:5000/swagger
+3- to open swagger , you can use the url where app listening to , here url=http://localhost:5000/swagger
 
-2. **Run Tests**:
+4. **Run Tests**:
    - Change the directory to `BackTests.csproj` by executing the follwoing commcands
    
    `cd Backend.Tests`.
