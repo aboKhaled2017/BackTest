@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BackTest</name>
+    </assembly>
+    <members>
+        <member name="M:BackTest.AppExtensions.RunAppSeeder(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.IServiceProvider)">
+            <summary>
+            used for adding a onetime mddleware for data seeding
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:BackTest.AppExtensions.UseCustomeExceptionMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            used to add an exception middleware for handling the global exceptions of the application
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:BackTest.AppExtensions.UseMigrationsMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            used to add a one time migration middleware for managng the database migration at the startup of the application
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="T:BackTest.Configurations.SeederSettings">
+            <summary>
+            used for managing the data seeding through a configurable options
+            </summary>
+        </member>
+        <member name="T:BackTest.Configurations.SeederConfigurations">
+            <summary>
+            binds the seeding settings section from app settings to the object class
+            </summary>
+        </member>
+        <member name="M:BackTest.Controllers.DriverController.GetDriverById(System.Int32)">
+            <summary>
+            Get a driver by ID.
+            </summary>
+            <param name="id">The ID of the driver to retrieve.</param>
+            <returns>The driver with the specified ID.</returns>
+        </member>
+        <member name="M:BackTest.Controllers.DriverController.GetAllDriver">
+            <summary>
+            Get a driver by ID.
+            </summary>
+            <param name="id">The ID of the driver to retrieve.</param>
+            <returns>The driver with the specified ID.</returns>
+        </member>
+        <member name="M:BackTest.Controllers.DriverController.AddNewDriver(BackTest.DtoModels.CreateDriverReq)">
+            <summary>
+            create a new driver
+            </summary>
+            <param name="req">request object which contains driver details</param>
+            <returns></returns>
+        </member>
+        <member name="M:BackTest.Controllers.DriverController.UpdateNewDriver(System.Int32,BackTest.DtoModels.UpdateDriverReq)">
+            <summary>
+            update a  driver
+            </summary>
+            <param name="req">request object which contains driver details</param>
+            <param name="id">a driver id</param>
+            <returns></returns>
+        </member>
+        <member name="M:BackTest.Controllers.DriverController.DeleteDriverById(System.Int32)">
+            <summary>
+            Delete a driver by ID.
+            </summary>
+            <param name="id">The ID of the driver to delete.</param>
+        </member>
+        <member name="T:BackTest.DataSeederManager">
+            <summary>
+            class which is used for managing the data at the start of the application
+            </summary>
+        </member>
+    </members>
+</doc>
