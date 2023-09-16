@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Serilog;
-using System.IO;
+﻿using Serilog;
 
 namespace Backend
 {

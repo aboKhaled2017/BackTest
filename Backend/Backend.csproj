@@ -22,6 +22,9 @@
 <PropertyGroup>
   <LangVersion>preview</LangVersion>
 </PropertyGroup>
- 
+
+  <ItemGroup>
+    <InternalsVisableTo Include="Backend.Tests"/>
+  </ItemGroup>
   
 </Project>

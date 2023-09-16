@@ -8,7 +8,7 @@ namespace Backend
     /// <summary>
     /// class which is used for managing the data at the start of the application
     /// </summary>
-    public sealed class DataSeederManager:IDisposable
+    public sealed class DataSeederManager : IDisposable
     {
         private readonly AppDbContext _db;
         private readonly IServiceProvider _sp;
@@ -22,7 +22,7 @@ namespace Backend
         {
             _sp = sp;
             _db = _sp.CreateScope().ServiceProvider.GetRequiredService<AppDbContext>();
-            _seederSettings =seedingOptions.Value;
+            _seederSettings = seedingOptions.Value;
         }
         public async Task CleanDataAsync()
         {
@@ -40,14 +40,14 @@ namespace Backend
         {
             if (!_seederSettings.EnableSeeding) //seeding is disabled from app serrings
                 return;
-            var x = _db.Drivers.Count();
+
             var randomNum = new Random(1);
 
             List<Driver> drivers = new();
 
             foreach (var name in Names)
             {
-                drivers.Add(Driver.Create(name, Names[randomNum.Next(0,9)],$"{name}@test.com",$"20115250643{randomNum.Next(0, 9)}"));
+                drivers.Add(Driver.Create(name, Names[randomNum.Next(0, 9)], $"{name}@test.com", $"20115250643{randomNum.Next(0, 9)}"));
             }
 
             _db.AddRange(drivers);

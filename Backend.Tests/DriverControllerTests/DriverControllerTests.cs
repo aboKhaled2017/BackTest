@@ -92,5 +92,44 @@ namespace BackTest.Tests.DriverControllerTests
             createAtActionResult.ActionName.ShouldBe(nameof(DriverController.GetDriverById));
             returnedDriver.ShouldNotBeNull();
         }
+
+        [Fact]
+        public async Task UpdateDriver_Should_Success()
+        {
+            //arrange
+            int driverId = 1;
+            var driver = Driver.Create("ahmed", "ali", "test@t.t", "201152506434");
+            driver.Id = driverId;
+            string updFirstName = "fawzy";
+            var updDriverReq = new UpdateDriverReq(updFirstName, driver.LastName, driver.Email, driver.PhoneNumber);
+            _mockDriverRepo.Setup(x => x.GetDriverByIdAsync(driverId)).ReturnsAsync(driver);
+            _mockDriverRepo.Setup(repo => repo.UpdateDriverAsync(It.IsAny<Driver>())).Callback((Driver driver) =>
+            {
+                driver.FirstName = updFirstName;
+            });
+
+            //act
+            var result = await driverController.UpdateNewDriver(driverId, updDriverReq);
+
+            //assert
+            var okResult = result.ShouldBeOfType<OkResult>();
+            driver.FirstName.ShouldBe(updFirstName);
+        }
+
+        [Fact]
+        public async Task DeleteDriver_Should_Success()
+        {
+            //arrange
+            int driverId = 1;
+            var driver = Driver.Create("ahmed", "ali", "test@t.t", "201152506434");
+            _mockDriverRepo.Setup(x => x.GetDriverByIdAsync(driverId)).ReturnsAsync(driver);
+            _mockDriverRepo.Setup(repo => repo.DeleteDriverAsync(It.IsAny<Driver>())).Returns(Task.CompletedTask);
+
+            //act
+            var result = await driverController.DeleteDriverById(driverId);
+
+            //assert
+            var okResult = result.ShouldBeOfType<OkResult>();
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace Backend.Configurations
     public class SeederSettings
     {
         public bool EnableSeeding { get; set; }
+        public bool DeleteDataBaseOrRestart { get; set; }
     }
 
     /// <summary>

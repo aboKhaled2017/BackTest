@@ -1,11 +1,9 @@
-﻿using FluentValidation;
-
-namespace Backend.DtoModels
+﻿namespace Backend.DtoModels
 {
     public record CreateDriverReq : BaseDriverReq
     {
-        public CreateDriverReq(string firstName, string lastname, string email, string phoneNumber) 
-            : base(firstName, lastname, email, phoneNumber)
+        public CreateDriverReq(string firstName, string lastName, string email, string phoneNumber)
+            : base(firstName, lastName, email, phoneNumber)
         {
         }
     }

@@ -4,7 +4,7 @@ namespace Backend.DtoModels
 {
     public record UpdateDriverReq : BaseDriverReq
     {
-        public UpdateDriverReq(string firstName, string lastname, string email, string phoneNumber) 
+        public UpdateDriverReq(string firstName, string lastname, string email, string phoneNumber)
             : base(firstName, lastname, email, phoneNumber)
         {
         }

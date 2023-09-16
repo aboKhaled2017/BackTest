@@ -1,5 +1,7 @@
-﻿using Backend.DataModels;
+﻿using Backend.Configurations;
+using Backend.DataModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Text.Json;
 
 namespace Backend
@@ -10,14 +12,14 @@ namespace Backend
         /// used for adding a onetime mddleware for data seeding
         /// </summary>
         /// <param name="app"></param>
-        public static void RunAppSeeder(this IApplicationBuilder app,IServiceProvider sp)
+        public async static Task RunAppSeederAsync(this IApplicationBuilder app, IServiceProvider sp)
         {
             // Perform data seeding at application startup
             var dataSeeder = sp.GetRequiredService<DataSeederManager>();
 
-            dataSeeder.CleanDataAsync();//remove all drivers data from db
+            await dataSeeder.CleanDataAsync();//remove all drivers data from db
 
-            dataSeeder.Seed10RandomDrivers();//then insert 10 drivers with random data
+            await dataSeeder.Seed10RandomDrivers();//then insert 10 drivers with random data
 
         }
 
@@ -53,6 +55,10 @@ namespace Backend
             {
                 var services = scope.ServiceProvider;
                 var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                var settings = scope.ServiceProvider.GetRequiredService<IOptions<SeederSettings>>().Value;
+
+                if (settings.DeleteDataBaseOrRestart)
+                    db.Database.EnsureDeleted();
 
                 if (db.Database.GetPendingMigrations().Any())
                 {

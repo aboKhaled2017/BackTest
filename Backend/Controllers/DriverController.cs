@@ -1,14 +1,8 @@
 ﻿using Backend.DataModels;
 using Backend.DtoModels;
 using Backend.Repos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Backend.Controllers
 {
@@ -46,7 +40,7 @@ namespace Backend.Controllers
 
             if (driver is null)
                 return NotFound($"cannot find driver as database with id {id}");
-            
+
             _logger.LogInformation($"a driver with id {id} retreived successully");
 
             return Ok(driver);
@@ -58,7 +52,7 @@ namespace Backend.Controllers
         /// <param name="id">The ID of the driver to retrieve.</param>
         /// <returns>The driver with the specified ID.</returns>
         [HttpGet]
-        [Route("getall")]       
+        [Route("getall")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [Produces(typeof(List<Driver>))]
         [Tags("Get all drivers")]
@@ -88,9 +82,9 @@ namespace Backend.Controllers
                 return BadRequest("Invalid request data");
 
             _logger.LogInformation($"trying to create a driver with {JsonConvert.SerializeObject(req)}");
-           
+
             var driver = Driver.Create(req.firstName, req.lastname, req.email, req.phoneNumber);
-           
+
             await _driverRepo.CreateDriverAsync(driver);
 
             _logger.LogInformation($"a new driver with id {driver.Id} created successully");
@@ -110,9 +104,9 @@ namespace Backend.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Produces(typeof(Driver))]
         [Tags("Update a driver")]
-        public async Task<IActionResult> UpdateNewDriver([FromRoute] int id,[FromBody] UpdateDriverReq req)
+        public async Task<IActionResult> UpdateNewDriver([FromRoute] int id, [FromBody] UpdateDriverReq req)
         {
-            if (req is null || id ==default)
+            if (req is null || id == default)
                 return BadRequest("Invalid request data");
 
             _logger.LogInformation($"trying to update a driver with id {id} with {JsonConvert.SerializeObject(req)}");
@@ -121,7 +115,7 @@ namespace Backend.Controllers
 
             if (driver is null)
                 return NotFound($"cannot find driver as database with id {id}");
-            
+
             req.BindTo(driver);
 
             await _driverRepo.UpdateDriverAsync(driver);

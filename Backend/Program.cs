@@ -20,10 +20,13 @@ builder.Services.AddDbContext<AppDbContext>(config =>
     config.UseSqlite(builder.Configuration.GetConnectionString("db"));
 });
 
+var deiscriptors = builder.Services.Where(x => x.ServiceType == typeof(DbContextOptions<AppDbContext>)).ToList();
+
 builder.Services.AddScoped<IDriverRepo, DriverRepo>();
 
 builder.Services.AddControllers()
-    .AddFluentValidation(opt=> {
+    .AddFluentValidation(opt =>
+    {
         opt.AutomaticValidationEnabled = true;
         opt.RegisterValidatorsFromAssembly(appAssembly);
     });
@@ -36,7 +39,7 @@ var app = builder.Build();
 
 app.UseMigrationsMiddleware();
 
-app.RunAppSeeder(app.Services);
+await app.RunAppSeederAsync(app.Services);
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -48,3 +51,5 @@ app.UseCustomeExceptionMiddleware();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }

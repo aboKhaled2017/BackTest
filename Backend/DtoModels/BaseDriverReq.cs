@@ -4,7 +4,7 @@ namespace Backend.DtoModels
 {
     public record BaseDriverReq(string firstName, string lastname, string email, string phoneNumber);
     public abstract class BaseDriverReqValidator<T> : AbstractValidator<T>
-        where T: BaseDriverReq
+        where T : BaseDriverReq
     {
         public BaseDriverReqValidator()
         {

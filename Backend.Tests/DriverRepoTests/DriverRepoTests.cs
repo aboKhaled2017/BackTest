@@ -99,7 +99,7 @@ namespace BackTest.Tests.DriverRepoTests
             await repo.CreateDriverAsync(driver);
             // Act
             await repo.DeleteDriverAsync(driver);
-            var deletedDriver=await _context.Drivers.FirstOrDefaultAsync(x=>x.Id==driver.Id);
+            var deletedDriver = await _context.Drivers.FirstOrDefaultAsync(x => x.Id == driver.Id);
             // Assert
             deletedDriver.ShouldBeNull();
         }

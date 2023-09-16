@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repos
 {
-    public sealed class DriverRepo: IDriverRepo
+    public sealed class DriverRepo : IDriverRepo
     {
         private readonly AppDbContext _db;
 
@@ -14,7 +14,7 @@ namespace Backend.Repos
 
         public async Task<Driver> GetDriverByIdAsync(int id)
         {
-            return await _db.Drivers.FirstOrDefaultAsync(x=>x.Id==id);
+            return await _db.Drivers.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<List<Driver>> GetAllDriversAsync()

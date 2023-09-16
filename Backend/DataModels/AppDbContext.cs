@@ -17,7 +17,7 @@ namespace Backend.DataModels
 
             modelBuilder.Entity<Driver>(e =>
             {
-               
+
                 e.HasKey(x => x.Id);
 
                 e.Property(x => x.FirstName)

@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Shouldly;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -15,7 +14,7 @@ namespace BackTest.Tests.SeedingTests
     /// <summary>
     /// tests to make sure the behavior of data seeder works properly at the start of the application
     /// </summary>
-    public class DataSeedsTests:IDisposable
+    public class DataSeedsTests : IDisposable
     {
         private DbContextOptions<AppDbContext> _options;
         private AppDbContext _context;
@@ -34,10 +33,10 @@ namespace BackTest.Tests.SeedingTests
             //create new DI for registering context & settings
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<AppDbContext>(sp => _context);
-            serviceCollection.Configure<SeederSettings>(o=>o.EnableSeeding=true);
+            serviceCollection.Configure<SeederSettings>(o => o.EnableSeeding = true);
 
             _sp = serviceCollection.BuildServiceProvider();
-             _settings= _sp.GetRequiredService<IOptions<SeederSettings>>();  
+            _settings = _sp.GetRequiredService<IOptions<SeederSettings>>();
         }
 
         public void Dispose()
@@ -51,7 +50,7 @@ namespace BackTest.Tests.SeedingTests
         public async Task SeedDefaultDataAsync_Should_Seed10DriversRecordsInDatabase()
         {
             // Arrange
-            var seeder = new DataSeederManager(_sp, _settings); 
+            var seeder = new DataSeederManager(_sp, _settings);
 
             // Act
             await seeder.CleanDataAsync();
