@@ -5,7 +5,9 @@ using Newtonsoft.Json;
 using Shouldly;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -150,6 +152,36 @@ namespace Backend.Tests.IntegrationTests
 
             //assert
             response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NotFound);
+        }
+
+        [Fact]
+        public async Task UpdateDriver_WhenValid_Should_ReturnOkResult()
+        {
+            //arrange
+            var driverCreateReq = new CreateDriverReq("ahmed", "ali", "test@tt.tt", "201152506434");
+            var updatedFName = "ahmdup";
+            var client = _server.CreateClient();
+            var res = await client.PostAsJsonAsync($"api/driver", driverCreateReq);
+            res.EnsureSuccessStatusCode();
+            var driverStr = await res.Content.ReadAsStringAsync();
+            var expectedDriver = JsonConvert.DeserializeObject<Driver>(driverStr);
+
+            var driverUpdateReq = new UpdateDriverReq(updatedFName, driverCreateReq.lastname, driverCreateReq.email, driverCreateReq.phoneNumber);
+            HttpContent content = new StringContent(JsonConvert.SerializeObject(driverUpdateReq), Encoding.UTF8, "application/json"); 
+            //act
+            var response = await client.SendAsync(new HttpRequestMessage {RequestUri= new System.Uri($"api/driver/{expectedDriver.Id}",System.UriKind.Relative), Method=HttpMethod.Put,Content=content});
+            response.EnsureSuccessStatusCode();
+
+            //assert
+            response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+            response = await client.GetAsync($"api/driver/{expectedDriver.Id}");
+            response.EnsureSuccessStatusCode();
+            var str = await response.Content.ReadAsStringAsync();
+            var actualDriver = JsonConvert.DeserializeObject<Driver>(str);
+
+            actualDriver.ShouldNotBe(null);
+            actualDriver.Id.ShouldBe(expectedDriver.Id);
+            actualDriver.FirstName.ShouldBe(updatedFName);
         }
     }
 }

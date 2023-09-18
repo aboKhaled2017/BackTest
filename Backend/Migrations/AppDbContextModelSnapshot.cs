@@ -46,6 +46,24 @@ namespace Backend.Migrations
 
                     b.ToTable("Drivers");
                 });
+
+            modelBuilder.Entity("Backend.DataModels.NameIdentifier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Value");
+
+                    b.ToTable("Names");
+                });
 #pragma warning restore 612, 618
         }
     }

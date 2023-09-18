@@ -23,6 +23,7 @@ builder.Services.AddDbContext<AppDbContext>(config =>
 var deiscriptors = builder.Services.Where(x => x.ServiceType == typeof(DbContextOptions<AppDbContext>)).ToList();
 
 builder.Services.AddScoped<IDriverRepo, DriverRepo>();
+builder.Services.AddScoped<INamesProcessingRepo, NamesProcessingRepo>();
 
 builder.Services.AddControllers()
     .AddFluentValidation(opt =>

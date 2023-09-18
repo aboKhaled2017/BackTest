@@ -9,6 +9,7 @@ namespace Backend.DataModels
         }
 
         public DbSet<Driver> Drivers { get; set; }
+        public DbSet<NameIdentifier> Names { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,6 +37,17 @@ namespace Backend.DataModels
                 .IsRequired(true)
                 .HasMaxLength(13);
             });
+
+            modelBuilder.Entity<NameIdentifier>(e =>
+            {
+                e.Property(x => x.Value)
+                .HasMaxLength(100)
+                .IsRequired(true);
+
+                e.HasIndex(x => x.Value);
+            });
         }
+
+        
     }
 }
