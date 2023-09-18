@@ -10,6 +10,10 @@ This ASP.NET Core 6 application is designed to perform CRUD (Create, Read, Updat
 - **Update Driver**: Modify existing driver details.
 - **Get All Drivers**: Retrieve a list of all drivers.
 
+- **Insert 10 Random Names**: For inserting 10 random names
+- **Get All Names**: Fetch all the inserted names
+- **Get Alphapetized Names By Index**: Get the alphapetized names'spellings by index of name
+
 ## Configuration
 
 The application utilizes a `SeederSettings` class to configure seeding behavior. If `EnableSeeding` is set to `true`, the application will seed the database with 10 random driver records during startup. If set to `false`, the application will not perform seeding.
