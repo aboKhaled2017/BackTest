@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(config =>
 {
-    config.UseSqlite(builder.Configuration.GetConnectionString("db"));
+    config.UseSqlServer(builder.Configuration.GetConnectionString("db"));
 });
 
 var deiscriptors = builder.Services.Where(x => x.ServiceType == typeof(DbContextOptions<AppDbContext>)).ToList();
