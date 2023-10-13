@@ -14,6 +14,12 @@ This ASP.NET Core 6 application is designed to perform CRUD (Create, Read, Updat
 - **Get All Names**: Fetch all the inserted names
 - **Get Alphapetized Names By Index**: Get the alphapetized names'spellings by index of name
 
+## Tests
+
+- **Unit Tests**: To make sure that every unit functionality works as expected
+- **Intergration Tests**: To make sure that evry usecase works as expected by utilizing Mocking and Replaced implementations to interfaces for testing
+- **End to end Testing** : To make sure that the system works as expected under hosting and every cross-cutting concern functionning well
+- **Docker container for running tests** : Utilizing a container instance for each integration test (parallel execution) for performance wise
 ## Configuration
 
 The application utilizes a `SeederSettings` class to configure seeding behavior. If `EnableSeeding` is set to `true`, the application will seed the database with 10 random driver records during startup. If set to `false`, the application will not perform seeding.
@@ -32,7 +38,7 @@ You configure this settings from appsettings.json file
 - SQLite Database for the Application
 - Swagger for OpenAPI documentation
 - Serilog for logging 
-
+- Docker container for running integration tests
 
 ## Environment to run the app (.NET 6 Project)
 
